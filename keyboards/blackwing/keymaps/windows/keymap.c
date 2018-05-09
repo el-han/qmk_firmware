@@ -4,7 +4,6 @@
 enum blackwing_layers
 {
   _STD,
-  _L2,
   _L3,
   _L4
 };
@@ -43,28 +42,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {MO(_L3), DE_A,    DE_O,    DE_E,    DE_I,    DE_U,    XXXXXXX, XXXXXXX, DE_H,    DE_D,    DE_R,    DE_N,    DE_S,     MO(_L3)},
   {C_SHIFT, SLS_BSL, DE_Q,    DE_J,    DE_K,    DE_X,    XXXXXXX, XXXXXXX, DE_B,    DE_M,    DE_W,    DE_V,    DE_L,     C_SHIFT},
   {KC_LCTL, KC_LGUI, KC_LALT, MO(_L3), KC_SPC,  C_SHIFT, KC_TAB,  KC_ENT,  C_SHIFT, KC_SPC,  MO(_L3), MO(_L4), KC_RGUI,  KC_RCTL}
-},
-
-/*
- * .-----------------------------------------------------.                  .-----------------------------------------------------.
- * | ESC    | 1      | 2      | 3      | 4      | 5      |                  | 6      | 7      | 8      | 9      | 0      | BACKSP |
- * |--------+--------+--------+--------+--------+--------|                  |--------+--------+--------+--------+--------+--------|
- * | TAB    | Q      | W      | E      | R      | T      |                  | Y      | U      | I      | O      | P      | ¨      |
- * |--------+--------+--------+--------+--------+--------|                  |--------+--------+--------+--------+--------+--------|
- * | L3     | A      | S      | D      | F      | G      |                  | J      | H      | K      | L      | ;      | L3     |
- * |--------+--------+--------+--------+--------+--------|                  |--------+--------+--------+--------+--------+--------|
- * | L2     | Z      | X      | C      | V      | B      |                  | N      | M      | ,      | .      | /      | L2     |
- * |--------+--------+--------+--------+--------+--------+--------..--------+--------+--------+--------+--------+--------+--------|
- * | CTRL   | META   | ALT    | L3     | L2     | SPACE  | TAB    || ENTER  | SPACE  | L2     | L3     | L4     | META   | CTRL   |
- * '--------+--------+--------+--------+--------+--------+--------''--------+--------+--------+--------+--------+--------+--------'
- */
-
-[_L2] = {
-  {_______, DE_1,    DE_2,    DE_3,    DE_4,    DE_5,    XXXXXXX, XXXXXXX, DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    KC_BSPC},
-  {_______, DE_MINS, DE_COMM, DE_DOT,  DE_P,    DE_Y,    XXXXXXX, XXXXXXX, DE_F,    DE_G,    DE_C,    DE_T,    DE_Z,    DE_RING},
-  {_______, DE_A,    DE_O,    DE_E,    DE_I,    DE_U,    XXXXXXX, XXXXXXX, DE_H,    DE_D,    DE_R,    DE_N,    DE_S,    _______},
-  {_______, DE_BSLS, DE_Q,    DE_J,    DE_K,    DE_X,    XXXXXXX, XXXXXXX, DE_B,    DE_M,    DE_W,    DE_V,    DE_L,    _______},
-  {_______, _______, _______, _______,_______,  _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 /*
@@ -164,10 +141,6 @@ void matrix_scan_user(void)
       } else {
         set_led_off;
       }
-      break;
-  case _L2:
-      set_led_green;
-      //register_code(KC_LSFT);
       break;
   case _L3:
       set_led_cyan;
