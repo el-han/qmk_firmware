@@ -15,8 +15,6 @@ enum blackwing_layers
 #define XXXXXXX KC_NO
 #define KC_MU ALGR(DE_M)
 
-#define LEADER_TIMEOUT 300
-
 enum custom_keycodes {
     SLS_BSL = SAFE_RANGE,
     C_SHIFT
@@ -203,34 +201,57 @@ void matrix_scan_user(void)
       break;
   }
 
-  extern bool leading; extern uint16_t leader_time; extern uint16_t leader_sequence[5];
+  extern bool leading;
+  extern uint16_t leader_time;
+  extern uint16_t leader_sequence[5];
+  extern uint8_t leader_sequence_size;
 
-  LEADER_DICTIONARY() {
-    leading = false;
-    leader_end();
 
-    SEQ_ONE_KEY(DE_A) {
+  if (leading) {
+    if (leader_sequence_size == LEADER_SEQUENCE_LEN) {
+      leading = false;
+      leader_end();
+    }
+    else if (timer_elapsed(leader_time) > LEADER_TIMEOUT) {
+      leading = false;
+      leader_end();
+    }
+
+    if (leader_sequence[0] == (DE_A)) {
       register_code(DE_AE);
       unregister_code(DE_AE);
+      leading = false;
+      leader_end();
     }
 
-    SEQ_ONE_KEY(DE_O) {
+    else if (leader_sequence[0] == (DE_O)) {
       register_code(DE_OE);
       unregister_code(DE_OE);
+      leading = false;
+      leader_end();
     }
 
-    SEQ_ONE_KEY(DE_U) {
+    else if (leader_sequence[0] == (DE_U)) {
       register_code(DE_UE);
       unregister_code(DE_UE);
+      leading = false;
+      leader_end();
     }
 
-    SEQ_ONE_KEY(DE_P) {
+    else if (leader_sequence[0] == (DE_P)) {
       register_code(KC_LCTL);
       register_code(KC_LSFT);
       register_code(DE_P);
       unregister_code(DE_P);
       unregister_code(KC_LSFT);
       unregister_code(KC_LCTL);
+      leading = false;
+      leader_end();
+    }
+
+    else if (leader_sequence[0] != 0) {
+      leading = false;
+      leader_end();
     }
   }
 };

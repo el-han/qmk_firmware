@@ -41,6 +41,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define ONESHOT_TIMEOUT 500
 
+#undef LEADER_TIMEOUT
+#define LEADER_TIMEOUT 3000
+
+#undef LEADER_SEQUENCE_LEN
+#define LEADER_SEQUENCE_LEN 2
 
 /* key combination for command */
 #define IS_COMMAND() ( \
