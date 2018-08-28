@@ -156,9 +156,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case SLS_BSL:
       if (record->event.pressed) {
         if (isShiftPressed)
-          SEND_STRING(SS_UP(X_LSHIFT)SS_DOWN(X_RALT)SS_TAP(X_MINUS)SS_UP(X_RALT)SS_DOWN(X_LSHIFT));
+          SEND_STRING(SS_UP(X_LSHIFT)SS_DOWN(X_RALT)SS_DOWN(X_MINUS));
         else
-          SEND_STRING(SS_DOWN(X_LSHIFT)SS_TAP(X_7)SS_UP(X_LSHIFT));
+          SEND_STRING(SS_DOWN(X_LSHIFT)SS_DOWN(X_7));
+      } else {
+        if (isShiftPressed)
+          SEND_STRING(SS_UP(X_MINUS)SS_UP(X_RALT)SS_DOWN(X_LSHIFT));
+        else
+          SEND_STRING(SS_UP(X_7)SS_UP(X_LSHIFT));
       }
       return false;
       break;
